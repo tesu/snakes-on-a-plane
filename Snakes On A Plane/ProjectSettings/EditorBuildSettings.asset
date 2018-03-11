@@ -8,3 +8,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/StartScreen.unity
     guid: 8c3f1aac3c9dab646a6a89d1d5e7b2a2
+  - enabled: 1
+    path: Assets/Scenes/snakes.unity
+    guid: 3f78898a1cbbb4f3995f45d47a8899fd
