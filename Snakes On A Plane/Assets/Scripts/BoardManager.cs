@@ -10,14 +10,13 @@ public class BoardManager : MonoBehaviour {
     public Color[] player_colors = {Color.red, Color.blue}; // remove these simple colorings when we have real characters/animations
     public Color dead_tile_color = Color.black;
     public float initial_offset;
-    public float seconds_per_beat;
-    public float delta_time;
+    public int bpm;
 
     private GameObject[,] board; // just x, y coordinates
 	private Player[] players;
+    private Music music;
 
     private Dictionary<string, Vector2> directions;
-    private float time_offset;
 
 	// Use this for initialization
 	void Start () {
@@ -45,17 +44,14 @@ public class BoardManager : MonoBehaviour {
 		directions.Add ("Up", new Vector2 (0, 1));
 		directions.Add ("Down", new Vector2 (0, -1));
 
-        GetComponent<AudioSource>().Play();
-        time_offset = initial_offset;
+        music = new Music(GetComponent<AudioSource>(), bpm, initial_offset);
 	}
 
 	// Update is called once per frame
 	void Update () {
-        time_offset += Time.deltaTime;
-        if (time_offset >= seconds_per_beat) {
-          EveryBeat();
-        }
-        while (time_offset >= seconds_per_beat) time_offset -= seconds_per_beat;
+        music.UpdateTime(Time.deltaTime);
+        if (music.IsNewBeat()) EveryBeat();
+        
 		// take player inputs
 		for (int i = 0; i < 2; i++) {
 			foreach (string key in directions.Keys) {
@@ -84,10 +80,7 @@ public class BoardManager : MonoBehaviour {
     }
 
 	void TryMovePlayer(int p_num, string key) {
-        if (time_offset > delta_time && time_offset < seconds_per_beat - delta_time)
-        {
-            return;
-        }
+        if (!music.WithinLeeway()) return;
 
 		Vector2 new_position = players[p_num].position + directions [key];
 		if (IsPositionAllowed (new_position)) {

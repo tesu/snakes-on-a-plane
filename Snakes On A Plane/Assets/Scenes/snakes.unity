@@ -393,9 +393,8 @@ MonoBehaviour:
   - {r: 1, g: 0, b: 0, a: 1}
   - {r: 0, g: 0, b: 1, a: 1}
   dead_tile_color: {r: 0, g: 0, b: 0, a: 1}
-  initial_offset: 0
-  seconds_per_beat: 0.42857143
-  delta_time: 0.15
+  initial_offset: 0.2
+  bpm: 140
 --- !u!82 &895618590
 AudioSource:
   m_ObjectHideFlags: 0
