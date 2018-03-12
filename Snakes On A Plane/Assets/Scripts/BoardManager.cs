@@ -14,9 +14,8 @@ public class BoardManager : MonoBehaviour {
     public float delta_time;
 
     private GameObject[,] board; // just x, y coordinates
-    private GameObject[] players; // if we end up with a lot of player-related variables, just make a Player class
-    private Vector2[] player_positions;
-    private float[] player_health;
+	private Player[] players;
+
     private Dictionary<string, Vector2> directions;
     private float time_offset;
 
@@ -30,15 +29,15 @@ public class BoardManager : MonoBehaviour {
 			}
 		}
 		// initialize players
-		players = new GameObject[2];
-		player_positions = new Vector2[] {new Vector2(0, 0), new Vector2(dimension-1, dimension-1)};
+
+		players = new Player[2];
+		Vector2[] player_positions = new Vector2[] {new Vector2(0, 0), new Vector2(dimension-1, dimension-1)};
 		for (int i = 0; i < 2; i++) {
-			players[i] = Instantiate (player_prefab, player_positions[i], new Quaternion ());
-			players [i].GetComponent<Renderer> ().material.color = player_colors[i];
+			GameObject player_object = Instantiate (player_prefab, player_positions[i], new Quaternion ());
+			players [i] = new Player (i, player_object, player_colors [i], player_positions [i], max_health);
+			players [i].game_object.GetComponent<Renderer> ().material.color = players [i].color;
 		}
-
-        player_health = new float[] {max_health, max_health};
-
+			
 		// initialize directions
 		directions = new Dictionary<string, Vector2>();
 		directions.Add ("Left", new Vector2 (-1, 0));
@@ -69,19 +68,15 @@ public class BoardManager : MonoBehaviour {
 
     void EveryBeat() {
         for (int i = 0; i < 2; i++) {
-            if (!IsPositionAllowed(player_positions[i])) {
-                player_health[i] -= 1;
-                if (player_health[i] <= 0) {
-                    Destroy(players[i]);
+            if (!IsPositionAllowed(players[i].position)) {
+                players[i].health -= 1;
+                if (players[i].health <= 0) {
+                    Destroy(players[i].game_object);
                     Destroy(this);
                 }
             }
-            board [(int)player_positions [i].x, (int)player_positions [i].y].GetComponent<Renderer> ().material.color = dead_tile_color;
+            board [(int)players [i].position.x, (int)players[i].position.y].GetComponent<Renderer> ().material.color = dead_tile_color;
         }
-    }
-
-    public float GetPlayerHealth(int p) {
-        return player_health[p];
     }
 
 	void TryMovePlayer(int p_num, string key) {
@@ -90,11 +85,11 @@ public class BoardManager : MonoBehaviour {
             return;
         }
 
-		Vector2 new_position = player_positions [p_num] + directions [key];
+		Vector2 new_position = players[p_num].position + directions [key];
 		if (IsPositionAllowed (new_position)) {
-			board [(int)player_positions [p_num].x, (int)player_positions [p_num].y].GetComponent<Renderer> ().material.color = dead_tile_color;
-			player_positions [p_num] += directions [key];
-			players[p_num].transform.Translate (directions [key]);
+			board [(int)players[p_num].position.x, (int)players[p_num].position.y].GetComponent<Renderer> ().material.color = dead_tile_color;
+			players[p_num].position += directions [key];
+			players[p_num].game_object.transform.Translate (directions [key]);
 		}
 	}
 
