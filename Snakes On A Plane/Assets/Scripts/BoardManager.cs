@@ -79,6 +79,10 @@ public class BoardManager : MonoBehaviour {
         }
     }
 
+    public float GetPlayerHealth(int p) {
+        return players[p].health;
+    }
+
 	void TryMovePlayer(int p_num, string key) {
         if (time_offset > delta_time && time_offset < seconds_per_beat - delta_time)
         {
