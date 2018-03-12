@@ -3,20 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BoardManager : MonoBehaviour {
+    public static float MAXHEALTH = 10;
 
-	public int dimension;
-	public GameObject tile_prefab;
-	public GameObject player_prefab; // for different players just have two different prefabs here
-	public Color[] player_colors = {Color.red, Color.blue}; // remove these simple colorings when we have real characters/animations
-	public Color dead_tile_color = Color.black;
+    public int dimension;
+    public GameObject tile_prefab;
+    public GameObject player_prefab; // for different players just have two different prefabs here
+    public Color[] player_colors = {Color.red, Color.blue}; // remove these simple colorings when we have real characters/animations
+    public Color dead_tile_color = Color.black;
     public float initial_offset;
     public float seconds_per_beat;
     public float delta_time;
 
-	private GameObject[,] board; // just x, y coordinates
-	private GameObject[] players; // if we end up with a lot of player-related variables, just make a Player class
-	private Vector2[] player_positions;
-	private Dictionary<string, Vector2> directions;
+    private GameObject[,] board; // just x, y coordinates
+    private GameObject[] players; // if we end up with a lot of player-related variables, just make a Player class
+    private Vector2[] player_positions;
+    private float[] player_health;
+    private Dictionary<string, Vector2> directions;
     private float time_offset;
 
 	// Use this for initialization
@@ -35,6 +37,9 @@ public class BoardManager : MonoBehaviour {
 			players[i] = Instantiate (player_prefab, player_positions[i], new Quaternion ());
 			players [i].GetComponent<Renderer> ().material.color = player_colors[i];
 		}
+
+        player_health = new float[] {MAXHEALTH, MAXHEALTH};
+
 		// initialize directions
 		directions = new Dictionary<string, Vector2>();
 		directions.Add ("Left", new Vector2 (-1, 0));
@@ -45,10 +50,13 @@ public class BoardManager : MonoBehaviour {
         GetComponent<AudioSource>().Play();
         time_offset = initial_offset;
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
         time_offset += Time.deltaTime;
+        if (time_offset >= seconds_per_beat) {
+          EveryBeat();
+        }
         while (time_offset >= seconds_per_beat) time_offset -= seconds_per_beat;
 		// take player inputs
 		for (int i = 0; i < 2; i++) {
@@ -60,10 +68,26 @@ public class BoardManager : MonoBehaviour {
 		}
 	}
 
+    void EveryBeat() {
+        for (int i = 0; i < 2; i++) {
+            if (!IsPositionAllowed(player_positions[i])) {
+                player_health[i] -= 1;
+                if (player_health[i] <= 0) {
+                    Destroy(players[i]);
+                    Destroy(this);
+                }
+            }
+            board [(int)player_positions [i].x, (int)player_positions [i].y].GetComponent<Renderer> ().material.color = dead_tile_color;
+        }
+    }
+
+    public float GetPlayerHealth(int p) {
+        return player_health[p];
+    }
+
 	void TryMovePlayer(int p_num, string key) {
         if (time_offset > delta_time && time_offset < seconds_per_beat - delta_time)
         {
-            Debug.Log(time_offset);
             return;
         }
 
