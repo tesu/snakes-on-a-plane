@@ -214,3 +214,7 @@ MonoBehaviour:
   player_colors:
   - {r: 1, g: 0, b: 0, a: 1}
   - {r: 0, g: 0, b: 1, a: 1}
+  dead_tile_color: {r: 0, g: 0, b: 0, a: 1}
+  initial_offset: 0
+  seconds_per_beat: 0.3
+  delta_time: 0
