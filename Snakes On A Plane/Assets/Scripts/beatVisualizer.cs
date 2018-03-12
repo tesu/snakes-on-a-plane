@@ -8,6 +8,7 @@ public class beatVisualizer : MonoBehaviour {
 	public float note_spawn_shift_left;
 	public float note_spawn_shift_up;
 	public Vector2 note_spawn_shift;
+	public Note[] notes;
 	// Use this for initialization
 	void Start () {
 		note_spawn_shift = new Vector2(note_spawn_shift_left, note_spawn_shift_up);
