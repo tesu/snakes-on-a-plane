@@ -9,6 +9,7 @@ public class Music {
     private float secondsPerBeat;
     private float leeway;
     private float offset;
+    private float totalTime;
 
     public Music(AudioSource audio, int bpm, float initialOffset = 0)
     {
@@ -17,6 +18,7 @@ public class Music {
         leeway = secondsPerBeat / 5;
         offset = initialOffset;
         beatCount = 0;
+        totalTime = 0;
         newBeat = true;
         song.Play();
     }
@@ -24,6 +26,7 @@ public class Music {
     public void UpdateTime(float delta)
     {
         offset += delta;
+        totalTime += delta;
         while (offset >= secondsPerBeat)
         {
             offset -= secondsPerBeat;
@@ -46,5 +49,18 @@ public class Music {
             return true;
         }
         return false;
+    }
+
+    public float[] GetBeatsForNextNSeconds(float n)
+    {
+        int size = 0;
+        for (float time = secondsPerBeat - offset; time < n; time += secondsPerBeat) size++;
+
+        float[] output = new float[size];
+        for (int i = 0; i < output.Length; i++)
+        {
+            output[i] = (secondsPerBeat - offset) + secondsPerBeat * i;
+        }
+        return output;
     }
 }
