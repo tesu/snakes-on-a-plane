@@ -382,6 +382,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1e5614c319db42b6b0944b5b96c5031, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  max_health: 20
   dimension: 8
   tile_prefab: {fileID: 1653540166241822, guid: c8f715853375c4a669d96a88f4075da9,
     type: 2}
@@ -393,7 +394,7 @@ MonoBehaviour:
   dead_tile_color: {r: 0, g: 0, b: 0, a: 1}
   initial_offset: 0
   seconds_per_beat: 0.42857143
-  delta_time: 0.1
+  delta_time: 0.15
 --- !u!1 &1789639652
 GameObject:
   m_ObjectHideFlags: 0

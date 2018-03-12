@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BoardManager : MonoBehaviour {
-    public static float MAXHEALTH = 10;
-
+    public float max_health;
     public int dimension;
     public GameObject tile_prefab;
     public GameObject player_prefab; // for different players just have two different prefabs here
@@ -38,7 +37,7 @@ public class BoardManager : MonoBehaviour {
 			players [i].GetComponent<Renderer> ().material.color = player_colors[i];
 		}
 
-        player_health = new float[] {MAXHEALTH, MAXHEALTH};
+        player_health = new float[] {max_health, max_health};
 
 		// initialize directions
 		directions = new Dictionary<string, Vector2>();

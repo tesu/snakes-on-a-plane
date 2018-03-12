@@ -23,7 +23,7 @@ public class HealthBar : MonoBehaviour {
   }
 
   private float calculateScaleX() {
-    float a = original_size * manager.GetPlayerHealth(player_num) / BoardManager.MAXHEALTH;
+    float a = original_size * manager.GetPlayerHealth(player_num) / manager.max_health;
     if (a <= 0) {
       return 0;
     }
