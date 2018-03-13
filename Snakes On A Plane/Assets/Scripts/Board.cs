@@ -63,4 +63,17 @@ using UnityEngine;
     }
   }
 
- }
+
+    public bool IsPositionAllowed(Vector2 position)
+    {
+        // for now, just checks in the dimension x dimension square, and not already used
+        bool in_board = position.x >= 0 && position.x < tiles_x && position.y >= 0 && position.y < tiles_y;
+
+        if (!in_board)
+        {
+            return false;
+        }
+        bool already_used = getTileState((int)position.x, (int)position.y) == Board.TileState.Dead;
+        return !already_used;
+    }
+}

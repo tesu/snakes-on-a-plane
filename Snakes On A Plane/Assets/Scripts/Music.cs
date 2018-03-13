@@ -15,7 +15,7 @@ public class Music {
     {
         song = audio;
         secondsPerBeat = (float)60 / bpm;
-        leeway = secondsPerBeat / 5;
+        leeway = secondsPerBeat / 5 * 2;
         offset = initialOffset;
         beatCount = 0;
         totalTime = 0;
@@ -38,7 +38,7 @@ public class Music {
     public bool WithinLeeway()
     {
         Debug.Log("offset: "+offset);
-        return offset < leeway || offset > secondsPerBeat - leeway;
+        return offset < leeway;
     }
 
     public bool IsNewBeat()
