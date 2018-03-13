@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Note {
 
-	public int lifetime;
+	public int lifetime_in_seconds;
 	public GameObject game_representation;
 
 	// Use this for initialization

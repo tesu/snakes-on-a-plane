@@ -12,7 +12,7 @@ public class BoardManager : MonoBehaviour {
     public float initial_offset;
     public int bpm;
 
-    private GameObject[,] board; // just x, y coordinates
+	private Board board;
 	private Player[] players;
     private Music music;
 
@@ -21,12 +21,7 @@ public class BoardManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		// initialize tiles
-		board = new GameObject[dimension, dimension];
-		for (int i = 0; i < dimension; i++) {
-			for (int j = 0; j < dimension; j++) {
-				board[i, j] = Instantiate(tile_prefab, new Vector2(i, j), new Quaternion());
-			}
-		}
+		board = new Board(dimension, dimension, tile_prefab);
 		// initialize players
 
 		players = new Player[2];
@@ -71,7 +66,7 @@ public class BoardManager : MonoBehaviour {
                     Destroy(this);
                 }
             }
-            board [(int)players [i].position.x, (int)players[i].position.y].GetComponent<Renderer> ().material.color = dead_tile_color;
+            board.setTileState((int)players [i].position.x, (int)players[i].position.y, Board.TileState.Dead);
         }
     }
 
@@ -84,7 +79,7 @@ public class BoardManager : MonoBehaviour {
 
 		Vector2 new_position = players[p_num].position + directions [key];
 		if (IsPositionAllowed (new_position)) {
-			board [(int)players[p_num].position.x, (int)players[p_num].position.y].GetComponent<Renderer> ().material.color = dead_tile_color;
+			board.setTileState((int)players[p_num].position.x, (int)players[p_num].position.y, Board.TileState.Dead);
 			players[p_num].position += directions [key];
 			players[p_num].game_object.transform.Translate (directions [key]);
 		}
@@ -92,11 +87,12 @@ public class BoardManager : MonoBehaviour {
 
 	bool IsPositionAllowed(Vector2 position) {
 		// for now, just checks in the dimension x dimension square, and not already used
-		bool in_board = position.x >= 0 && position.x < dimension && position.y >= 0 && position.y < dimension;
+		bool in_board = position.x >= 0 && position.x < board.tiles_x && position.y >= 0 && position.y < board.tiles_y;
+
 		if (!in_board) {
 			return false;
 		}
-		bool already_used = board [(int)position.x, (int)position.y].GetComponent<Renderer> ().material.color == dead_tile_color;
+		bool already_used = board.getTileState((int)position.x, (int)position.y) == Board.TileState.Dead;
 		return !already_used;
 	}
 }
