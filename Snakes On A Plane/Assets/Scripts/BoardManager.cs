@@ -15,11 +15,12 @@ public class BoardManager : MonoBehaviour {
 	private Board board;
 	private Player[] players;
     private Music music;
+	private bool active = false;
 
     private Dictionary<string, Vector2> directions;
 
 	// Use this for initialization
-	void Start () {
+	public void Init () {
 		// initialize tiles
 		board = new Board(dimension, dimension, tile_prefab);
 		// initialize players
@@ -30,6 +31,8 @@ public class BoardManager : MonoBehaviour {
 			GameObject player_object = Instantiate (player_prefab, player_positions[i], new Quaternion ());
 			players [i] = new Player (i, player_object, player_colors [i], player_positions [i], max_health);
 			players [i].game_object.GetComponent<Renderer> ().material.color = players [i].color;
+			GameObject health_bar = GameObject.Find ("HealthBar" + i);
+			health_bar.GetComponent<HealthBar> ().Init ();
 		}
 			
 		// initialize directions
@@ -40,10 +43,15 @@ public class BoardManager : MonoBehaviour {
 		directions.Add ("Down", new Vector2 (0, -1));
 
         music = new Music(GetComponent<AudioSource>(), bpm, initial_offset);
+
+		active = true;
 	}
 
 	// Update is called once per frame
 	void Update () {
+		if (!active) {
+			return;
+		}
         music.UpdateTime(Time.deltaTime);
         if (music.IsNewBeat()) EveryBeat();
         

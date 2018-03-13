@@ -7,10 +7,12 @@ public class HealthBar : MonoBehaviour {
   public int player_num;
   public bool growRight;
   private float original_size;
+  private bool active = false;
 
   // Use this for initialization
-  void Start () {
+  public void Init () {
     original_size = gameObject.transform.localScale.x;
+	active = true;
   }
 
   private float edgeX() {
@@ -32,13 +34,16 @@ public class HealthBar : MonoBehaviour {
 
   // Update is called once per frame
   void Update () {
-    float oldX = edgeX();
+	if (!active) {
+		return;
+	}
+	float oldX = edgeX ();
 
-    Vector3 s = gameObject.transform.localScale;
-    gameObject.transform.localScale = new Vector3(calculateScaleX(), s.y, s.z);
+	Vector3 s = gameObject.transform.localScale;
+	gameObject.transform.localScale = new Vector3 (calculateScaleX (), s.y, s.z);
 
-    float newX = edgeX();
-    float difference = newX - oldX;
-    transform.Translate(new Vector3(-difference, 0f, 0f));
+	float newX = edgeX ();
+	float difference = newX - oldX;
+	transform.Translate (new Vector3 (-difference, 0f, 0f));
   }
 }
