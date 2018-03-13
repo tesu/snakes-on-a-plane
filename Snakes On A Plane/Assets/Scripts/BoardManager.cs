@@ -15,6 +15,7 @@ public class BoardManager : MonoBehaviour {
 	private Board board;
 	private Player[] players;
     private Music music;
+    private List<string> dataCollection;
 
     private Dictionary<string, Vector2> directions;
 
@@ -39,6 +40,8 @@ public class BoardManager : MonoBehaviour {
 		directions.Add ("Down", new Vector2 (0, -1));
 
         music = new Music(GetComponent<AudioSource>(), bpm, initial_offset);
+
+        dataCollection = new List<string>();
 	}
 
 	// Update is called once per frame
@@ -50,6 +53,7 @@ public class BoardManager : MonoBehaviour {
 		for (int i = 0; i < 2; i++) {
 			foreach (string key in directions.Keys) {
 				if (Input.GetButtonDown ("P" + i + key)) {
+                    dataCollection.Add(key);
 					TryMovePlayer (i, key);
 				}
 			}
