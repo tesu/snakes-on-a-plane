@@ -60,6 +60,12 @@ public class BoardManager : MonoBehaviour {
         for (int i = 0; i < 2; i++) {
             board.setTileState(players[i].X(), players[i].Y(), Board.TileState.Dead);
             players[i].ResetMoved();
+
+            if (!players[i].IsAlive())
+            {
+                StaticValues.winner = 1 - i;
+                UnityEngine.SceneManagement.SceneManager.LoadScene("EndScreen");
+            }
         }
     }
 
