@@ -348,7 +348,8 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 11
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 95892265836428380, guid: 0fe7d660182ce9345a943cc2ced2b06f, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 0fe7d660182ce9345a943cc2ced2b06f, type: 2}
   m_IsPrefabParent: 0
 --- !u!4 &731424444 stripped
