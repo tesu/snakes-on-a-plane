@@ -15,9 +15,7 @@ public class Board : MonoBehaviour {
 
   public GameObject tile_prefab;
 
-  public Color[] player_colors = {Color.red, Color.blue}; // remove these simple colorings when we have real characters/animations
-  public Color dead_tile_color = Color.black;
-  public Color active_tile_color = Color.white;
+  public Color active_tile_color = Color.white; // remove these colorings later
   public Color intermediate_tile_color = Color.white;
 
   public enum TileState {
@@ -49,16 +47,18 @@ public class Board : MonoBehaviour {
   public void setTileState(int x, int y, TileState t) {
     switch (t)
     {
-        case TileState.Active:
+		case TileState.Active: //(yangk): to set active, you can either run the anim backward (?)
+			// or you can honestly probably just remake the prefab, that's prob easier
           this.board[x, y].GetComponent<Renderer> ().material.color = active_tile_color;
           this.tile_states[x, y] = TileState.Active;
           break;
-        case TileState.Intermediate:
+		case TileState.Intermediate: //(yangk): you probably don't need this state now that we have tile anims?
+			// unless you want to set them to intermediate while you're waiting for them to become dead or smth
           board[x,y].GetComponent<Renderer> ().material.color = intermediate_tile_color;
           this.tile_states[x, y] = TileState.Intermediate;
           break;
-        case TileState.Dead:
-          board[x,y].GetComponent<Renderer> ().material.color = dead_tile_color;
+		case TileState.Dead:
+		  board [x, y].GetComponent<Animator> ().enabled = true;
           this.tile_states[x, y] = TileState.Dead;
           break;
     }

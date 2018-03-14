@@ -10,18 +10,15 @@ public class Player
     private GameObject game_object;
     private Vector2 position;
     private Board board;
-	private Color color;
 
-    public Player (int p_id, GameObject p_game_object, Color p_color, Vector2 p_position, int p_health, Board p_board)
+    public Player (int p_id, GameObject p_game_object, Vector2 p_position, int p_health, Board p_board)
 	{
 		id = p_id;
 		game_object = p_game_object;
-		color = p_color;
 		position = p_position;
 		health = p_health;
         board = p_board;
         moved = false;
-        game_object.GetComponent<Renderer>().material.color = p_color;
 	}
 
     public void ResetMoved()

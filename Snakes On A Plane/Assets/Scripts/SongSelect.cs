@@ -7,6 +7,7 @@ public class SongSelect : MonoBehaviour {
 	// maybe read this data from a file in the future
 	private string[] songnames = {"Reformat", "Industrious_Ferret", "Pookatori_and_Friends", "4", "5", "6"};
 	private string[] bgs = {"volcano", "cemetery", "iceberg", "digital", "space", "village"};
+	public GameObject[] anim_tile_prefabs; // provided in same order as bgs
 
 	private string bg_prefix = "BG_";
 	private string song_prefix = "Song_";
@@ -45,9 +46,11 @@ public class SongSelect : MonoBehaviour {
 				GameObject.Find ("SpaceToSelect").GetComponent<UnityEngine.UI.Text>().enabled = false;
 				GameObject song_info_display = GameObject.Find (song_prefix + songs [song_index].name);
 				song_info_display.GetComponent<UnityEngine.UI.Text>().enabled = false;
+				GameObject.Find ("HealthBar0").GetComponent<SpriteRenderer>().enabled = true;
+				GameObject.Find ("HealthBar1").GetComponent<SpriteRenderer>().enabled = true;
 
 				BoardManager board = gameObject.GetComponent (typeof(BoardManager)) as BoardManager;
-				board.Init (song_info_display.GetComponent<AudioSource>());
+				board.Init (song_info_display.GetComponent<AudioSource>(), anim_tile_prefabs[song_index]);
 			}
 		}
 	}

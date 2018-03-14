@@ -5,10 +5,7 @@ using UnityEngine;
 public class BoardManager : MonoBehaviour {
     public int max_health;
     public int dimension;
-    public GameObject tile_prefab;
-    public GameObject player_prefab; // for different players just have two different prefabs here
-    public Color[] player_colors = {Color.red, Color.blue}; // remove these simple colorings when we have real characters/animations
-    public Color dead_tile_color = Color.black;
+    public GameObject[] player_prefabs; // for different players just have two different prefabs here
     public float initial_offset;
     public int bpm;
 
@@ -25,7 +22,7 @@ public class BoardManager : MonoBehaviour {
     private Dictionary<string, Vector2> directions;
 
 	// Use this for initialization
-	public void Init (AudioSource audio) {
+	public void Init (AudioSource audio, GameObject tile_prefab) {
 		// initialize tiles
 		board = gameObject.GetComponent(typeof(Board)) as Board;
 		board.Init(board_location, dimension, dimension, tile_prefab);
@@ -34,8 +31,8 @@ public class BoardManager : MonoBehaviour {
 		players = new Player[2];
 		Vector2[] player_positions = new Vector2[] {new Vector2(0, 0), new Vector2(dimension-1, dimension-1)};
 		for (int i = 0; i < 2; i++) {
-			GameObject player_object = Instantiate (player_prefab, player_positions[i] + board_location, new Quaternion ());
-			players [i] = new Player (i, player_object, player_colors [i], player_positions [i], max_health, board);
+			GameObject player_object = Instantiate (player_prefabs[i], player_positions[i] + board_location, new Quaternion ());
+			players [i] = new Player (i, player_object, player_positions [i], max_health, board);
 			GameObject health_bar = GameObject.Find ("HealthBar" + i);
 			health_bar.GetComponent<HealthBar> ().Init ();
 		}
