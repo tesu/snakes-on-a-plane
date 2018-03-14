@@ -25,7 +25,7 @@ public class BoardManager : MonoBehaviour {
     private Dictionary<string, Vector2> directions;
 
 	// Use this for initialization
-	public void Init () {
+	public void Init (AudioSource audio) {
 		// initialize tiles
 		board = gameObject.GetComponent(typeof(Board)) as Board;
 		board.Init(board_location, dimension, dimension, tile_prefab);
@@ -47,7 +47,7 @@ public class BoardManager : MonoBehaviour {
 		directions.Add ("Up", new Vector2 (0, 1));
 		directions.Add ("Down", new Vector2 (0, -1));
 
-        music = new Music(GetComponent<AudioSource>(), bpm, initial_offset);
+        music = new Music(audio, bpm, initial_offset);
 		
 		// initialize beat visualizer
 		b_vis = gameObject.GetComponent(typeof(BeatVisualizer)) as BeatVisualizer;
