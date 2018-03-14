@@ -10,6 +10,7 @@ public class Music {
     private float leeway;
     private float offset;
     private float totalTime;
+    private bool playing;
 
     public Music(AudioSource audio, int bpm, float initialOffset = 0)
     {
@@ -20,7 +21,7 @@ public class Music {
         beatCount = 0;
         totalTime = 0;
         newBeat = false;
-        song.Play();
+        playing = false;
     }
 
     // Needed to initialize the beat visualizer
@@ -31,6 +32,10 @@ public class Music {
 
     public void UpdateTime(float delta)
     {
+        if (!playing) {
+            song.Play();
+            playing = true;
+        }
         offset += delta;
         totalTime += delta;
         while (offset >= secondsPerBeat)
