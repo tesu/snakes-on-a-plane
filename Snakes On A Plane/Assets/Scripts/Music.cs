@@ -23,6 +23,12 @@ public class Music {
         song.Play();
     }
 
+    // Needed to initialize the beat visualizer
+    public float GetLeeway() 
+    {
+        return this.leeway;
+    }
+
     public void UpdateTime(float delta)
     {
         offset += delta;

@@ -2,13 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Note {
+public class Note : MonoBehaviour {
 
-	public int lifetime_in_seconds;
-	public GameObject game_representation;
+	public float max_X;
 
 	// Use this for initialization
-	public Note() {
-		
+	public void Init(float max_X) {
+		this.max_X = max_X;
+	}
+
+	public void Update() {
+		//get current x position
+		float current_x = this.transform.position.x;
+
+		if (current_x > max_X) {
+			Destroy(gameObject);
+		}
+
 	}
 }

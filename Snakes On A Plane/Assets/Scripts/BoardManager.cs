@@ -29,9 +29,6 @@ public class BoardManager : MonoBehaviour {
 		// initialize tiles
 		board = gameObject.GetComponent(typeof(Board)) as Board;
 		board.Init(board_location, dimension, dimension, tile_prefab);
-		// initialize beat visualizer
-		b_vis = gameObject.GetComponent(typeof(BeatVisualizer)) as BeatVisualizer;
-		b_vis.Init(beat_visualizer_location, 1.0f);
 
 		// initialize players
 		players = new Player[2];
@@ -51,6 +48,10 @@ public class BoardManager : MonoBehaviour {
 		directions.Add ("Down", new Vector2 (0, -1));
 
         music = new Music(GetComponent<AudioSource>(), bpm, initial_offset);
+		
+		// initialize beat visualizer
+		b_vis = gameObject.GetComponent(typeof(BeatVisualizer)) as BeatVisualizer;
+		b_vis.Init(beat_visualizer_location, music.GetLeeway());
         
         dataCollection = new List<string>();
 

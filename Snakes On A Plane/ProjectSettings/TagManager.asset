@@ -53,6 +53,9 @@ TagManager:
   - name: BeatVis
     uniqueID: 3153869191
     locked: 0
+  - name: BeatVisSecondary
+    uniqueID: 2967240633
+    locked: 0
   - name: Notes
     uniqueID: 4143892013
     locked: 0

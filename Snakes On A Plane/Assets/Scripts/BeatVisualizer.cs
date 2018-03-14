@@ -39,7 +39,7 @@ public class BeatVisualizer : MonoBehaviour {
 
 		this.strikezone = Instantiate(strikezone_prefab, position_unity_units+ new Vector2(note_destroy_right, 0), new Quaternion());
 		//we need to set the width of the strikezone proportional to the delta time, relative to the total note travel time.
-		this.strikezone.GetComponent<SpriteRenderer>().sortingLayerName = "Notes";
+		this.strikezone.GetComponent<SpriteRenderer>().sortingLayerName = "BeatVisSecondary";
 		this.note_tolerance_length = this.strikezone.GetComponent<SpriteRenderer>().sprite.bounds.extents.x*2;
 		
 		// note velocity dependent on how long we want the notes to be allowed.
@@ -56,8 +56,12 @@ public class BeatVisualizer : MonoBehaviour {
 		note.GetComponent<Rigidbody2D>().velocity = new Vector2(note_velocity_x, 0);
 		note.GetComponent<SpriteRenderer>().sortingLayerName = "Notes";
 		
-		float note_verticality = ((float)Mathf.Round(Random.Range(4f, -4f)))*staff_extends.y/9 ;
+		float note_verticality = ((float)Mathf.Round(Random.Range(4f, -4f)))*staff_extends.y/4.5f ;
 		note.transform.position = position_unity_units + new Vector2(note_spawn_left, note_verticality);
+
+		
+		Note noteScript = note.AddComponent<Note>() as Note;
+		noteScript.Init(this.position_unity_units.x + note_destroy_right + note_tolerance_length/2);
 	}
 
 	void Update () {
