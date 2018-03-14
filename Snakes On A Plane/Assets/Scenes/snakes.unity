@@ -175,8 +175,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1972666339
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 27c74c0cc669b470ca62c08e183bf319, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -380,8 +380,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1972666339
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 27c74c0cc669b470ca62c08e183bf319, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -509,7 +509,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1e5614c319db42b6b0944b5b96c5031, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  max_health: 10
+  max_health: 50
   dimension: 8
   tile_prefab: {fileID: 1653540166241822, guid: c8f715853375c4a669d96a88f4075da9,
     type: 2}
@@ -520,7 +520,7 @@ MonoBehaviour:
   - {r: 0, g: 0, b: 1, a: 1}
   dead_tile_color: {r: 0, g: 0, b: 0, a: 1}
   initial_offset: 0.3
-  bpm: 140
+  bpm: 50
   beat_visualizer_location: {x: 3.5, y: 7}
   board_location: {x: 0, y: -1}
 --- !u!82 &895618590
@@ -653,6 +653,7 @@ MonoBehaviour:
     type: 2}
   strikezone_prefab: {fileID: 1473657546378470, guid: fbeff1d85313348d2ae91d80cd7933cc,
     type: 2}
+  seconds_in_advance: 0
 --- !u!1001 &918864503
 Prefab:
   m_ObjectHideFlags: 0
