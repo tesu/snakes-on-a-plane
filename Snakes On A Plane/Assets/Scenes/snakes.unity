@@ -420,6 +420,8 @@ GameObject:
   - component: {fileID: 895618589}
   - component: {fileID: 895618590}
   - component: {fileID: 895618591}
+  - component: {fileID: 895618592}
+  - component: {fileID: 895618593}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -519,6 +521,8 @@ MonoBehaviour:
   dead_tile_color: {r: 0, g: 0, b: 0, a: 1}
   initial_offset: 0.3
   bpm: 140
+  beat_visualizer_location: {x: 3.5, y: 7}
+  board_location: {x: 0, y: -1}
 --- !u!82 &895618590
 AudioSource:
   m_ObjectHideFlags: 0
@@ -610,6 +614,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37f34c64bca0b40f8a90f6eb3b0b7506, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &895618592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 895618584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 294f5a6e5cf9c485e99621286536205f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tiles_x: 0
+  tiles_y: 0
+  tile_prefab: {fileID: 0}
+  player_colors:
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 1, a: 1}
+  dead_tile_color: {r: 0, g: 0, b: 0, a: 1}
+  active_tile_color: {r: 1, g: 1, b: 1, a: 1}
+  intermediate_tile_color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!114 &895618593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 895618584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab60d7044f451485c85f1a1b26085065, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  note_prefab: {fileID: 1374160124942012, guid: e7fcd07dea0d44d439db32ba2fa9c87d,
+    type: 2}
+  staff_prefab: {fileID: 1649680923989670, guid: 40f35c78517d449dbafc43165f803566,
+    type: 2}
+  cleff_prefab: {fileID: 1169345495546134, guid: d0eccf66321be49979c847b62744e23e,
+    type: 2}
+  strikezone_prefab: {fileID: 1473657546378470, guid: fbeff1d85313348d2ae91d80cd7933cc,
+    type: 2}
 --- !u!1001 &918864503
 Prefab:
   m_ObjectHideFlags: 0

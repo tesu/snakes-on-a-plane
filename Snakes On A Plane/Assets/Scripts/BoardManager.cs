@@ -12,6 +12,10 @@ public class BoardManager : MonoBehaviour {
     public float initial_offset;
     public int bpm;
 
+	public Vector2 beat_visualizer_location;
+	public Vector2 board_location;
+
+	private BeatVisualizer b_vis;
 	private Board board;
 	private Player[] players;
     private Music music;
@@ -23,13 +27,17 @@ public class BoardManager : MonoBehaviour {
 	// Use this for initialization
 	public void Init () {
 		// initialize tiles
-		board = new Board(dimension, dimension, tile_prefab);
-		// initialize players
+		board = gameObject.GetComponent(typeof(Board)) as Board;
+		board.Init(board_location, dimension, dimension, tile_prefab);
+		// initialize beat visualizer
+		b_vis = gameObject.GetComponent(typeof(BeatVisualizer)) as BeatVisualizer;
+		b_vis.Init(beat_visualizer_location, 1.0f);
 
+		// initialize players
 		players = new Player[2];
 		Vector2[] player_positions = new Vector2[] {new Vector2(0, 0), new Vector2(dimension-1, dimension-1)};
 		for (int i = 0; i < 2; i++) {
-			GameObject player_object = Instantiate (player_prefab, player_positions[i], new Quaternion ());
+			GameObject player_object = Instantiate (player_prefab, player_positions[i] + board_location, new Quaternion ());
 			players [i] = new Player (i, player_object, player_colors [i], player_positions [i], max_health, board);
 			GameObject health_bar = GameObject.Find ("HealthBar" + i);
 			health_bar.GetComponent<HealthBar> ().Init ();
@@ -79,6 +87,9 @@ public class BoardManager : MonoBehaviour {
                 UnityEngine.SceneManagement.SceneManager.LoadScene("EndScreen");
             }
         }
+
+		//temporary feedback for notes on the tester
+		b_vis.CreateNote();
     }
 
     public int GetPlayerHealth(int p_num)

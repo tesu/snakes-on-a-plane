@@ -1,0 +1,24 @@
+fileFormatVersion: 2
+guid: ab60d7044f451485c85f1a1b26085065
+timeCreated: 1520834061
+licenseType: Free
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - note_prefab: {fileID: 1374160124942012, guid: e7fcd07dea0d44d439db32ba2fa9c87d,
+      type: 2}
+  - staff_prefab: {fileID: 1649680923989670, guid: 40f35c78517d449dbafc43165f803566,
+      type: 2}
+  - cleff_prefab: {fileID: 1169345495546134, guid: d0eccf66321be49979c847b62744e23e,
+      type: 2}
+  - strikezone_prefab: {fileID: 1473657546378470, guid: fbeff1d85313348d2ae91d80cd7933cc,
+      type: 2}
+  - staff: {instanceID: 0}
+  - cleff: {instanceID: 0}
+  - strikezone: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
- public class Board : MonoBehaviour {
+public class Board : MonoBehaviour {
 
   private GameObject[,] board;
   private TileState[,] tile_states;
@@ -11,6 +11,7 @@ using UnityEngine;
 
   private Vector2 position;
   private Vector2 tile_size;
+  private Vector2 board_location;
 
   public GameObject tile_prefab;
 
@@ -25,7 +26,7 @@ using UnityEngine;
     Dead
   }
 
-  public Board(int tiles_x, int tiles_y , GameObject tile_prefab) {
+  public void Init(Vector2 board_location, int tiles_x, int tiles_y , GameObject tile_prefab) {
     this.tiles_x = tiles_x;
     this.tiles_y = tiles_y;
     this.tile_prefab = tile_prefab;
@@ -35,7 +36,7 @@ using UnityEngine;
     // Initialize the board
     for (int i = 0; i < tiles_y; i++) {
 			for (int j = 0; j < tiles_x; j++) {
-				this.board[i, j] = Instantiate(tile_prefab, new Vector2(i, j), new Quaternion());
+				this.board[i, j] = Instantiate(tile_prefab, new Vector2(i, j) + board_location, new Quaternion());
         this.tile_states[i, j] = TileState.Active;
 			}
 		}
@@ -66,7 +67,6 @@ using UnityEngine;
 
     public bool IsPositionAllowed(Vector2 position)
     {
-        // for now, just checks in the dimension x dimension square, and not already used
         bool in_board = position.x >= 0 && position.x < tiles_x && position.y >= 0 && position.y < tiles_y;
 
         if (!in_board)

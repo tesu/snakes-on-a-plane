@@ -50,6 +50,9 @@ TagManager:
   - name: Player
     uniqueID: 946697859
     locked: 0
-  - name: FG
+  - name: BeatVis
     uniqueID: 3153869191
+    locked: 0
+  - name: Notes
+    uniqueID: 4143892013
     locked: 0
