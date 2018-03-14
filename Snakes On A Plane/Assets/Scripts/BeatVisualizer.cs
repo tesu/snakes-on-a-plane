@@ -45,7 +45,7 @@ public class BeatVisualizer : MonoBehaviour {
 		// note velocity dependent on how long we want the notes to be allowed.
 		note_velocity_x =  note_tolerance_length/note_tolerance_secs;
 		// seconds in advance is how long we will need to know about notes in advance.
-		seconds_in_advance = (note_destroy_right + (note_tolerance_length/2) - note_spawn_left)/note_velocity_x;
+		seconds_in_advance = (note_destroy_right - (note_tolerance_length) - note_spawn_left)/note_velocity_x;
 		//set internal variables
 		this.note_tolerance_secs = note_tolerance_secs;
 		this.position_unity_units = position_unity_units;
