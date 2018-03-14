@@ -25,7 +25,7 @@ public class BeatVisualizer : MonoBehaviour {
 	private float note_tolerance_secs;
 	private float note_tolerance_length;
 	private float note_velocity_x;
-	private float seconds_in_advance;
+	public float seconds_in_advance;
 	private Note[] notes;
 
 	public void Init(Vector2 position_unity_units, float note_tolerance_secs) {
@@ -45,13 +45,14 @@ public class BeatVisualizer : MonoBehaviour {
 		// note velocity dependent on how long we want the notes to be allowed.
 		note_velocity_x =  note_tolerance_length/note_tolerance_secs;
 		// seconds in advance is how long we will need to know about notes in advance.
-		seconds_in_advance = note_destroy_right + (note_tolerance_length/2) - note_spawn_left;
+		seconds_in_advance = (note_destroy_right + (note_tolerance_length/2) - note_spawn_left)/note_velocity_x;
 		//set internal variables
 		this.note_tolerance_secs = note_tolerance_secs;
 		this.position_unity_units = position_unity_units;
 	}
-	
-	public void CreateNote() {
+
+	public IEnumerator CreateNote(float delay) {
+		yield return new WaitForSeconds(delay);
 		GameObject note = Instantiate(note_prefab);
 		note.GetComponent<Rigidbody2D>().velocity = new Vector2(note_velocity_x, 0);
 		note.GetComponent<SpriteRenderer>().sortingLayerName = "Notes";

@@ -6,7 +6,7 @@ public class Music {
     private AudioSource song;
     private int beatCount;
     private bool newBeat;
-    private float secondsPerBeat;
+    public float secondsPerBeat;
     private float leeway;
     private float offset;
     private float totalTime;

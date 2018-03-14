@@ -90,7 +90,12 @@ public class BoardManager : MonoBehaviour {
         }
 
 		//temporary feedback for notes on the tester
-		b_vis.CreateNote();
+		float[] timings = music.GetBeatsForNextNSeconds(b_vis.seconds_in_advance + music.secondsPerBeat);
+		foreach (float timing in timings) {
+			if (timing > b_vis.seconds_in_advance) {
+				StartCoroutine(b_vis.CreateNote(timing - b_vis.seconds_in_advance));
+			}
+		}
     }
 
     public int GetPlayerHealth(int p_num)
