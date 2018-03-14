@@ -19,7 +19,7 @@ public class Music {
         offset = initialOffset;
         beatCount = 0;
         totalTime = 0;
-        newBeat = true;
+        newBeat = false;
         song.Play();
     }
 
