@@ -868,6 +868,7 @@ MonoBehaviour:
   - {fileID: 1053143888264492, guid: b4854616e16084ff9be6b047041d45ee, type: 2}
   initial_offset: 0.3
   bpm: 140
+  invulnerability_beats: 5
   beat_visualizer_location: {x: 3.5, y: 7}
   board_location: {x: 0, y: -1}
 --- !u!82 &895618590

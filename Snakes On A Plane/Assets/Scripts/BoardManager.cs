@@ -8,8 +8,9 @@ public class BoardManager : MonoBehaviour {
     public GameObject[] player_prefabs; // for different players just have two different prefabs here
     public float initial_offset;
     public int bpm;
+    public int invulnerability_beats;
 
-	public Vector2 beat_visualizer_location;
+    public Vector2 beat_visualizer_location;
 	public Vector2 board_location;
 
 	private BeatVisualizer b_vis;
@@ -32,7 +33,7 @@ public class BoardManager : MonoBehaviour {
 		Vector2[] player_positions = new Vector2[] {new Vector2(0, 0), new Vector2(dimension-1, dimension-1)};
 		for (int i = 0; i < 2; i++) {
 			GameObject player_object = Instantiate (player_prefabs[i], player_positions[i] + board_location, new Quaternion ());
-			players [i] = new Player (i, player_object, player_positions [i], max_health, board);
+			players [i] = new Player (i, player_object, player_positions [i], max_health, board, this);
 			GameObject health_bar = GameObject.Find ("HealthBar" + i);
 			health_bar.GetComponent<HealthBar> ().Init ();
 		}
@@ -107,10 +108,15 @@ public class BoardManager : MonoBehaviour {
         if (!music.WithinLeeway())
         {
             players[p_num].MissedBeat();
-            return;
         }
-		if (players[p_num].Move(directions[key])) {
-			board.setTileState(players[p_num].X(), players[p_num].Y(), Board.TileState.Dead);
-		}
+        else
+        {
+            players[p_num].Move(directions[key]);
+        }
 	}
+
+    public bool IsInvulnerable()
+    {
+        return music.GetBeatCount() < invulnerability_beats;
+    }
 }

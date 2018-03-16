@@ -30,6 +30,11 @@ public class Music {
         return this.leeway;
     }
 
+    public int GetBeatCount()
+    {
+        return beatCount;
+    }
+
     public void UpdateTime(float delta)
     {
         if (!playing) {

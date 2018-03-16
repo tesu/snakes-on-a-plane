@@ -10,11 +10,12 @@ public class Player
     private GameObject game_object;
     private Vector2 position;
     private Board board;
+    private BoardManager bm;
     private Direction facing;
 
     private enum Direction { down, right, up, left };
 
-    public Player (int p_id, GameObject p_game_object, Vector2 p_position, int p_health, Board p_board)
+    public Player (int p_id, GameObject p_game_object, Vector2 p_position, int p_health, Board p_board, BoardManager p_bm)
 	{
 		id = p_id;
 		game_object = p_game_object;
@@ -23,6 +24,7 @@ public class Player
         board = p_board;
         moved = false;
         facing = Direction.down;
+        bm = p_bm;
 	}
 
     public void ResetMoved()
@@ -70,13 +72,16 @@ public class Player
         if (direction.x < 0) Face(Direction.left);
         if (direction.y > 0) Face(Direction.up);
         if (direction.y < 0) Face(Direction.down);
+
         if (!moved && CanMove(direction))
         {
             position += direction;
             game_object.transform.Translate(direction, Space.World);
             moved = true;
+            board.setTileState(X(), Y(), Board.TileState.Dead);
             return true;
         }
+
         moved = true;
         MadeBadMove();
         return false;
@@ -84,17 +89,17 @@ public class Player
 
     public void MissedBeat()
     {
-        if (health > 0) health -= 1;
+        if (!bm.IsInvulnerable() && health > 0) health -= 1;
     }
 
     public void WrongBeat()
     {
-        if (health > 0) health -= 1;
+        if (!bm.IsInvulnerable() && health > 0) health -= 1;
     }
 
     public void MadeBadMove()
     {
-        if (health > 0) health -= 1;
+        if (!bm.IsInvulnerable() && health > 0) health -= 1;
     }
 
     public bool IsAlive()
