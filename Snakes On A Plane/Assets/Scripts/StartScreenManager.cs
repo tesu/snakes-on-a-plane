@@ -11,11 +11,9 @@ public class StartScreenManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
-
-    public void StartGame()
-    {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("snakes");
+        if (Input.GetButtonDown("Submit"))
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene("snakes");
+        }
     }
 }
