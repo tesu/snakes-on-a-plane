@@ -9,21 +9,20 @@ public class EndScreenManager : MonoBehaviour {
     void Start () {
 		if (StaticValues.winner == 1)
         {
-            end_text.GetComponent<UnityEngine.UI.Text>().text = "Blue won!";
+            end_text.GetComponent<UnityEngine.UI.Text>().text = "Red wins!";
         }
         else
         {
-            end_text.GetComponent<UnityEngine.UI.Text>().text = "Red won!";
+            end_text.GetComponent<UnityEngine.UI.Text>().text = "Blue wins!";
         }
 	}
 	
 	// Update is called once per frame
-	void Update () {
-
-    }
-
-    public void StartGame()
+	void Update ()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("snakes");
+        if (Input.GetButtonDown("Submit"))
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene("snakes");
+        }
     }
 }
