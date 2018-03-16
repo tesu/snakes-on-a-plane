@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EndScreenManager : MonoBehaviour {
     public GameObject end_text;
+    public GameObject red_score;
+    public GameObject blue_score;
 
     // Use this for initialization
     void Start () {
@@ -15,7 +17,9 @@ public class EndScreenManager : MonoBehaviour {
         {
             end_text.GetComponent<UnityEngine.UI.Text>().text = "Blue wins!";
         }
-	}
+        red_score.GetComponent<UnityEngine.UI.Text>().text = "Red: " + StaticValues.score[0];
+        blue_score.GetComponent<UnityEngine.UI.Text>().text = "Blue: " + StaticValues.score[1];
+    }
 	
 	// Update is called once per frame
 	void Update ()
