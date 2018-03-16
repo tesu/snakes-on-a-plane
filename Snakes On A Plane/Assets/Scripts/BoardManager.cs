@@ -82,6 +82,7 @@ public class BoardManager : MonoBehaviour {
             if (!players[i].IsAlive())
             {
                 StaticValues.winner = 1 - i;
+                StaticValues.score[i]++;
                 UnityEngine.SceneManagement.SceneManager.LoadScene("EndScreen");
             }
         }
