@@ -6,8 +6,10 @@ public class Board : MonoBehaviour {
 
   private GameObject[,] board;
   private TileState[,] tile_states;
+  private int[,] beats_until_respawn;
   public int tiles_x;
   public int tiles_y;
+    public int cell_respawn_time;
 
   private Vector2 position;
   private Vector2 tile_size;
@@ -30,12 +32,15 @@ public class Board : MonoBehaviour {
     this.tile_prefab = tile_prefab;
     this.board = new GameObject[tiles_y, tiles_x];
 		this.tile_states = new TileState [tiles_y, tiles_x];
+        this.beats_until_respawn = new int[tiles_y, tiles_x];
+        this.board_location = board_location;
 
     // Initialize the board
     for (int i = 0; i < tiles_y; i++) {
 			for (int j = 0; j < tiles_x; j++) {
 				this.board[i, j] = Instantiate(tile_prefab, new Vector2(i, j) + board_location, new Quaternion());
         this.tile_states[i, j] = TileState.Active;
+                this.beats_until_respawn[i, j] = 0;
 			}
 		}
    }
@@ -60,10 +65,31 @@ public class Board : MonoBehaviour {
 		case TileState.Dead:
 		  board [x, y].GetComponent<Animator> ().enabled = true;
           this.tile_states[x, y] = TileState.Dead;
+            this.beats_until_respawn[x,y] = cell_respawn_time;
           break;
     }
   }
 
+    public void blockRegenerate()
+    {
+        for (int x = 0; x < beats_until_respawn.GetLength(0); x++)
+        {
+            for (int y = 0; y < beats_until_respawn.GetLength(1); y++)
+            {
+                if (beats_until_respawn[x, y] == 1)
+                {
+                    this.board[x, y] = Instantiate(tile_prefab, new Vector2(x, y) + board_location, new Quaternion());
+                    this.board[x, y].GetComponent<Animator>().enabled = false;
+                    this.tile_states[x, y] = TileState.Active;
+                    beats_until_respawn[x, y]--;
+                }
+                else if (beats_until_respawn[x, y] > 0)
+                {
+                    beats_until_respawn[x, y]--;
+                }
+            }
+        }
+    }
 
     public bool IsPositionAllowed(Vector2 position)
     {

@@ -982,6 +982,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tiles_x: 0
   tiles_y: 0
+  cell_respawn_time: 15
   tile_prefab: {fileID: 0}
   active_tile_color: {r: 1, g: 1, b: 1, a: 1}
   intermediate_tile_color: {r: 1, g: 1, b: 1, a: 1}

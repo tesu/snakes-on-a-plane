@@ -77,7 +77,10 @@ public class BoardManager : MonoBehaviour {
 		}
 	}
 
-    void EveryBeat() {
+    void EveryBeat()
+    {
+        board.blockRegenerate();
+
         for (int i = 0; i < 2; i++) {
             board.setTileState(players[i].X(), players[i].Y(), Board.TileState.Dead);
             players[i].ResetMoved();
@@ -89,6 +92,7 @@ public class BoardManager : MonoBehaviour {
                 UnityEngine.SceneManagement.SceneManager.LoadScene("EndScreen");
             }
         }
+
 
 		//temporary feedback for notes on the tester
 		float[] timings = music.GetBeatsForNextNSeconds(b_vis.seconds_in_advance + music.secondsPerBeat);
