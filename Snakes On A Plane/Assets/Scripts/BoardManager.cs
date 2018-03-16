@@ -57,7 +57,9 @@ public class BoardManager : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if (!active) {
+        if (Input.GetButtonDown("Cancel")) UnityEngine.SceneManagement.SceneManager.LoadScene("StartScreen");
+
+        if (!active) {
 			return;
 		}
         music.UpdateTime(Time.deltaTime);
