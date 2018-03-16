@@ -105,12 +105,14 @@ public class BoardManager : MonoBehaviour {
     }
 
 	void TryMovePlayer(int p_num, string key) {
-        if (!music.WithinLeeway())
+        Music.Accuracy accuracy = music.GetAccuracy();
+        if (accuracy == Music.Accuracy.miss)
         {
             players[p_num].MissedBeat();
         }
         else
         {
+            Debug.Log(accuracy);
             players[p_num].Move(directions[key]);
         }
 	}

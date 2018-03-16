@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Music {
+    public enum Accuracy { miss, okay, good, perfect };
+
     private AudioSource song;
     private int beatCount;
     private bool newBeat;
@@ -49,6 +51,15 @@ public class Music {
             beatCount++;
             newBeat = true;
         }
+    }
+
+    public Accuracy GetAccuracy()
+    {
+        if (offset >= leeway) return Accuracy.miss;
+        float howClose = Mathf.Abs(offset - leeway / 2)/leeway;
+        if (howClose < .1) return Accuracy.perfect;
+        if (howClose < .25) return Accuracy.good;
+        return Accuracy.okay;
     }
 
     public bool WithinLeeway()
