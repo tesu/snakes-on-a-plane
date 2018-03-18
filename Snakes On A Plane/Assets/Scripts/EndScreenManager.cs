@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Analytics;
 
 public class EndScreenManager : MonoBehaviour {
     public GameObject end_text;
@@ -17,6 +18,10 @@ public class EndScreenManager : MonoBehaviour {
         {
             end_text.GetComponent<UnityEngine.UI.Text>().text = "Blue wins!";
         }
+        Analytics.CustomEvent("gameOver", new Dictionary<string, object>
+        {
+            {"winner", StaticValues.winner }
+        });
         red_score.GetComponent<UnityEngine.UI.Text>().text = "Red: " + StaticValues.score[0];
         blue_score.GetComponent<UnityEngine.UI.Text>().text = "Blue: " + StaticValues.score[1];
     }

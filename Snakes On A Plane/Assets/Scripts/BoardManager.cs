@@ -17,7 +17,6 @@ public class BoardManager : MonoBehaviour {
 	private Board board;
 	private Player[] players;
     private Music music;
-    private List<string> dataCollection;
 	private bool active = false;
 
     private Dictionary<string, Vector2> directions;
@@ -50,8 +49,6 @@ public class BoardManager : MonoBehaviour {
 		// initialize beat visualizer
 		b_vis = gameObject.GetComponent(typeof(BeatVisualizer)) as BeatVisualizer;
 		b_vis.Init(beat_visualizer_location, music.GetLeeway());
-        
-        dataCollection = new List<string>();
 
 		active = true;
 	}
@@ -70,7 +67,6 @@ public class BoardManager : MonoBehaviour {
 		for (int i = 0; i < 2; i++) {
 			foreach (string key in directions.Keys) {
 				if (Input.GetButtonDown ("P" + i + key)) {
-                    dataCollection.Add(key);
 					TryMovePlayer (i, key);
 				}
 			}
