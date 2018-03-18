@@ -5,7 +5,7 @@ using UnityEngine;
 public class SongSelect : MonoBehaviour {
 
 	// maybe read this data from a file in the future
-	private string[] songnames = {"Reformat", "Industrious_Ferret", "Pookatori_and_Friends", "4", "5", "6"};
+	private string[] songnames = {"Volatile_Reaction", "Pookatori_and_Friends", "Frost_Waltz", "Reformat", "Rhinoceros", "Industrious_Ferret"};
 	private string[] bgs = {"volcano", "cemetery", "iceberg", "digital", "space", "village"};
 	public GameObject[] anim_tile_prefabs; // provided in same order as bgs
 
@@ -20,12 +20,16 @@ public class SongSelect : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		songs = new SongInfo[songnames.Length];
+		//create songname objects
 		for(int i = 0; i < songnames.Length; i++) {
 			songs[i] = new SongInfo(songnames[i], bgs[i]);
 		}
+
 		GameObject background = GameObject.Find (bg_prefix + songs[0].bg);
 		background.GetComponent<SpriteRenderer> ().sortingLayerName = bg_layer;
+
 		GameObject song_info_display = GameObject.Find (song_prefix + songs [0].name);
+		
 		song_info_display.GetComponent<UnityEngine.UI.Text> ().enabled = true;
 		song_info_display.GetComponent<AudioSource> ().enabled = true;
 	}
