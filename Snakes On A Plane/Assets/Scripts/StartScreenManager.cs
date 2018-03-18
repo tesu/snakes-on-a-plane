@@ -14,6 +14,14 @@ public class StartScreenManager : MonoBehaviour {
         if (Input.GetButtonDown("Submit"))
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene("snakes");
-        }
+		}
+		if (Input.GetButtonDown("Rules"))
+		{
+			UnityEngine.SceneManagement.SceneManager.LoadScene("RulesScene");
+		}
+		if (Input.GetButtonDown("Credits"))
+		{
+			UnityEngine.SceneManagement.SceneManager.LoadScene("CreditsScene");
+		}
     }
 }
