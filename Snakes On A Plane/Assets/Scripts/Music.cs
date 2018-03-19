@@ -81,12 +81,12 @@ public class Music {
     public float[] GetBeatsForNextNSeconds(float n)
     {
         int size = 0;
-        for (float time = secondsPerBeat - offset; time < n; time += secondsPerBeat) size++;
+		for (float time = secondsPerBeat - offset + leeway/2; time < n; time += secondsPerBeat) size++;
 
         float[] output = new float[size];
         for (int i = 0; i < output.Length; i++)
         {
-            output[i] = (secondsPerBeat - offset) + secondsPerBeat * i;
+			output[i] = (secondsPerBeat - offset + leeway/2) + secondsPerBeat * i;
         }
         return output;
     }
