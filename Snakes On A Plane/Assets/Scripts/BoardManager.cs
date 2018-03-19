@@ -7,7 +7,6 @@ public class BoardManager : MonoBehaviour {
     public int dimension;
     public GameObject[] player_prefabs; // for different players just have two different prefabs here
     public float initial_offset;
-    public int bpm;
     public int invulnerability_beats;
 
     public Vector2 beat_visualizer_location;
@@ -22,7 +21,7 @@ public class BoardManager : MonoBehaviour {
     private Dictionary<string, Vector2> directions;
 
 	// Use this for initialization
-	public void Init (AudioSource audio, GameObject tile_prefab) {
+	public void Init (AudioSource audio, GameObject tile_prefab, int bpm) {
 		// initialize tiles
 		board = gameObject.GetComponent(typeof(Board)) as Board;
 		board.Init(board_location, dimension, dimension, tile_prefab);
