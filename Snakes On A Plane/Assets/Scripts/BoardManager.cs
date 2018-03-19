@@ -122,7 +122,7 @@ public class BoardManager : MonoBehaviour {
 		text.GetComponent<TextParticle>().SetText(t);
 		text.GetComponent<TextParticle>().SetColor(c);
 		text.transform.SetParent(canvas.transform);
-		text.transform.position = canvas_scale_factor*(new Vector2(players[p_num].X(), players[p_num].Y())+ board_location) + new Vector2(350,75);
+		text.transform.position = canvas_scale_factor*(new Vector2(players[p_num].X(), players[p_num].Y())+ board_location) + new Vector2(300,100);
 
 	}
 
