@@ -12,6 +12,11 @@ public class BoardManager : MonoBehaviour {
 
 	public GameObject text_particle_prefab;
 
+	public Color perfect_color;
+	public Color good_color;
+	public Color okay_color;
+	public Color miss_color;
+
     public Vector2 beat_visualizer_location;
 	public Vector2 board_location;
 
@@ -112,25 +117,41 @@ public class BoardManager : MonoBehaviour {
         return players[p_num].health;
     }
 
+	void GenerateText(int p_num, string t, Color c) {
+		GameObject text = Instantiate(text_particle_prefab) as GameObject;
+		text.GetComponent<TextParticle>().SetText(t);
+		text.GetComponent<TextParticle>().SetColor(c);
+		text.transform.SetParent(canvas.transform);
+		text.transform.position = canvas_scale_factor*(new Vector2(players[p_num].X(), players[p_num].Y())+ board_location) + new Vector2(350,75);
+
+	}
+
 	void TryMovePlayer(int p_num, string key) {
         Music.Accuracy accuracy = music.GetAccuracy();
         if (accuracy == Music.Accuracy.miss)
         {
             players[p_num].MissedBeat();
+			GenerateText(p_num, "Miss :(", miss_color);
         }
         else
-        {
-
-			Debug.Log(accuracy);
-            players[p_num].Move(directions[key]);
-
-			GameObject text = Instantiate(text_particle_prefab) as GameObject;
-			text.GetComponent<TextParticle>().SetText("Perfect!");
-			text.transform.parent = canvas.transform;
-			text.transform.position = canvas_scale_factor*(new Vector2(players[0].X(), players[0].Y())+ board_location) + new Vector2(300,100); //projection into canvas space
-            
+        {		
+			players[p_num].Move(directions[key]);
+			switch (accuracy)
+			{
+				case Music.Accuracy.okay:
+					GenerateText(p_num, "Okay..", okay_color);
+					break;
+				case Music.Accuracy.good:
+					GenerateText(p_num, "Good!", good_color);
+					break;
+				case Music.Accuracy.perfect:
+					GenerateText(p_num, "Perfect", perfect_color);
+					break;
+			}	
         }
 	}
+
+	
 
     public bool IsInvulnerable()
     {

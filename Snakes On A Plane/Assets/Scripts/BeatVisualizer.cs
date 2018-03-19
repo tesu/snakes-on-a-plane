@@ -63,7 +63,7 @@ public class BeatVisualizer : MonoBehaviour {
 		note.transform.position = position_unity_units + new Vector2(note_spawn_left, note_verticality);
 
 		float edge = this.position_unity_units.x + note_destroy_right + note_tolerance_length/2;
-		float measure_edge = this.position_unity_units.x + note_destroy_right - note_tolerance_length/2;
+		float measure_edge = this.position_unity_units.x + note_hit_right;
 
 		Note noteScript = note.AddComponent<Note>() as Note;
 		noteScript.Init(edge, measure_edge ,active_note);
