@@ -8,14 +8,8 @@ public class BoardManager : MonoBehaviour {
     public GameObject[] player_prefabs; // for different players just have two different prefabs here
     public float initial_offset;
     public int invulnerability_beats;
-	public int canvas_scale_factor;
 
 	public GameObject text_particle_prefab;
-
-	public Color perfect_color;
-	public Color good_color;
-	public Color okay_color;
-	public Color miss_color;
 
     public Vector2 beat_visualizer_location;
 	public Vector2 board_location;
@@ -26,8 +20,6 @@ public class BoardManager : MonoBehaviour {
     private Music music;
 	private bool active = false;
 
-	private GameObject canvas;
-
     private Dictionary<string, Vector2> directions;
 
 	// Use this for initialization
@@ -35,9 +27,6 @@ public class BoardManager : MonoBehaviour {
 		// initialize tiles
 		board = gameObject.GetComponent(typeof(Board)) as Board;
 		board.Init(board_location, dimension, dimension, tile_prefab);
-		
-		// initialize canvas
-		canvas = GameObject.Find("Canvas");
 
 		// initialize players
 		players = new Player[2];
@@ -117,12 +106,10 @@ public class BoardManager : MonoBehaviour {
         return players[p_num].health;
     }
 
-	void GenerateText(int p_num, string t, Color c) {
+	void GenerateText(int p_num, Music.Accuracy m) {
 		GameObject text = Instantiate(text_particle_prefab) as GameObject;
-		text.GetComponent<TextParticle>().SetText(t);
-		text.GetComponent<TextParticle>().SetColor(c);
-		text.transform.SetParent(canvas.transform);
-		text.transform.position = canvas_scale_factor*(new Vector2(players[p_num].X(), players[p_num].Y())+ board_location) + new Vector2(300,100);
+		text.GetComponent<TextParticle>().SetText(m);
+		text.transform.position = new Vector2(players[p_num].X(), players[p_num].Y()) + board_location;
 
 	}
 
@@ -131,23 +118,12 @@ public class BoardManager : MonoBehaviour {
         if (accuracy == Music.Accuracy.miss)
         {
             players[p_num].MissedBeat();
-			GenerateText(p_num, "Miss :(", miss_color);
+			GenerateText(p_num, Music.Accuracy.miss);
         }
         else
         {		
-			players[p_num].Move(directions[key]);
-			switch (accuracy)
-			{
-				case Music.Accuracy.okay:
-					GenerateText(p_num, "Okay..", okay_color);
-					break;
-				case Music.Accuracy.good:
-					GenerateText(p_num, "Good!", good_color);
-					break;
-				case Music.Accuracy.perfect:
-					GenerateText(p_num, "Perfect", perfect_color);
-					break;
-			}	
+			players[p_num].Move(directions[key]);		
+			GenerateText(p_num, accuracy);
         }
 	}
 

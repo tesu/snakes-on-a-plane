@@ -930,7 +930,6 @@ MonoBehaviour:
   - {fileID: 1053143888264492, guid: b4854616e16084ff9be6b047041d45ee, type: 2}
   initial_offset: 0.3
   invulnerability_beats: 7
-  canvas_scale_factor: 50
   text_particle_prefab: {fileID: 1889241978424790, guid: d670e917143a045298891b0ba4925a9d,
     type: 2}
   perfect_color: {r: 0.13916521, g: 0.2634978, b: 0.8602941, a: 1}
