@@ -78,6 +78,7 @@ public class Board : MonoBehaviour {
             {
                 if (beats_until_respawn[x, y] == 1)
                 {
+					Destroy (this.board [x, y]);
                     this.board[x, y] = Instantiate(tile_prefab, new Vector2(x, y) + board_location, new Quaternion());
                     this.board[x, y].GetComponent<Animator>().enabled = false;
                     this.tile_states[x, y] = TileState.Active;
