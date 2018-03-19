@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class HealthBar : MonoBehaviour {
   public BoardManager manager;
+  public Sprite base_sprite;
+  public Sprite white_sprite;
   public int player_num;
   public bool growRight;
+  public float flash_length = 0.1f;
   private float original_size;
   private bool active = false;
 
@@ -44,6 +47,15 @@ public class HealthBar : MonoBehaviour {
 
 	float newX = edgeX ();
 	float difference = newX - oldX;
+	if (newX != oldX) {
+	  StartCoroutine (FlashWhite ());
+	}
 	transform.Translate (new Vector3 (-difference, 0f, 0f));
+  }
+
+  IEnumerator FlashWhite() {
+	gameObject.GetComponent<SpriteRenderer> ().sprite = white_sprite;
+	yield return new WaitForSeconds(flash_length);
+	gameObject.GetComponent<SpriteRenderer> ().sprite = base_sprite;
   }
 }

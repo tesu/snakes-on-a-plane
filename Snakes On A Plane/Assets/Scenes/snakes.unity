@@ -142,8 +142,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 895618589}
+  base_sprite: {fileID: 21300000, guid: 5e3f2f0c7e5b0e04f9e0c7089539a5c5, type: 3}
+  white_sprite: {fileID: 21300000, guid: 32c62efd6013a0040a91f4f48ae05608, type: 3}
   player_num: 0
   growRight: 1
+  flash_length: 0.1
 --- !u!212 &372573363
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -587,8 +590,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 895618589}
+  base_sprite: {fileID: 21300000, guid: 6bdf107f8668f744f883bd677410d5f9, type: 3}
+  white_sprite: {fileID: 21300000, guid: 2bc7bcb86d62b91498c8b9c8cb513bda, type: 3}
   player_num: 1
   growRight: 0
+  flash_length: 0.1
 --- !u!212 &840601383
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -923,7 +929,7 @@ MonoBehaviour:
   - {fileID: 1053143888264492, guid: 6f23d784298624bdfbe6b7afe2c7058a, type: 2}
   - {fileID: 1053143888264492, guid: b4854616e16084ff9be6b047041d45ee, type: 2}
   initial_offset: 0.3
-  invulnerability_beats: 5
+  invulnerability_beats: 7
   canvas_scale_factor: 50
   text_particle_prefab: {fileID: 1889241978424790, guid: d670e917143a045298891b0ba4925a9d,
     type: 2}
