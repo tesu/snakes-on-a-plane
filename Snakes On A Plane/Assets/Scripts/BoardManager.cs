@@ -9,6 +9,9 @@ public class BoardManager : MonoBehaviour {
     public float initial_offset;
     public int bpm;
     public int invulnerability_beats;
+	public int canvas_scale_factor;
+
+	public GameObject text_particle_prefab;
 
     public Vector2 beat_visualizer_location;
 	public Vector2 board_location;
@@ -19,6 +22,8 @@ public class BoardManager : MonoBehaviour {
     private Music music;
 	private bool active = false;
 
+	private GameObject canvas;
+
     private Dictionary<string, Vector2> directions;
 
 	// Use this for initialization
@@ -26,6 +31,9 @@ public class BoardManager : MonoBehaviour {
 		// initialize tiles
 		board = gameObject.GetComponent(typeof(Board)) as Board;
 		board.Init(board_location, dimension, dimension, tile_prefab);
+		
+		// initialize canvas
+		canvas = GameObject.Find("Canvas");
 
 		// initialize players
 		players = new Player[2];
@@ -55,6 +63,7 @@ public class BoardManager : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+
         if (Input.GetButtonDown("Cancel")) UnityEngine.SceneManagement.SceneManager.LoadScene("StartScreen");
 
         if (!active) {
@@ -112,8 +121,15 @@ public class BoardManager : MonoBehaviour {
         }
         else
         {
-            Debug.Log(accuracy);
+
+			Debug.Log(accuracy);
             players[p_num].Move(directions[key]);
+
+			GameObject text = Instantiate(text_particle_prefab) as GameObject;
+			text.GetComponent<TextParticle>().SetText("Perfect!");
+			text.transform.parent = canvas.transform;
+			text.transform.position = canvas_scale_factor*(new Vector2(players[0].X(), players[0].Y())+ board_location) + new Vector2(300,100); //projection into canvas space
+            
         }
 	}
 

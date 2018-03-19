@@ -18,7 +18,7 @@ public class Music {
     {
         song = audio;
         secondsPerBeat = (float)60 / bpm;
-        leeway = secondsPerBeat / 5 * 2;
+        leeway = (secondsPerBeat / 5 )* 4; // increase this number to add leeway
         offset = initialOffset;
         beatCount = 0;
         totalTime = 0;
@@ -34,7 +34,7 @@ public class Music {
 
     public int GetBeatCount()
     {
-        return beatCount;
+        return this.beatCount;
     }
 
     public void UpdateTime(float delta)

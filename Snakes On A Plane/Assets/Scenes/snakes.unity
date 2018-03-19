@@ -186,7 +186,7 @@ SpriteRenderer:
   m_Size: {x: 4, y: 0.32}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
 --- !u!4 &372573364
 Transform:
@@ -631,7 +631,7 @@ SpriteRenderer:
   m_Size: {x: 4, y: 0.32}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
 --- !u!4 &840601384
 Transform:
@@ -925,6 +925,9 @@ MonoBehaviour:
   initial_offset: 0.3
   bpm: 140
   invulnerability_beats: 5
+  canvas_scale_factor: 65
+  text_particle_prefab: {fileID: 1889241978424790, guid: d670e917143a045298891b0ba4925a9d,
+    type: 2}
   beat_visualizer_location: {x: 3.5, y: 7}
   board_location: {x: 0, y: -1}
 --- !u!82 &895618590
@@ -1059,9 +1062,10 @@ MonoBehaviour:
     type: 2}
   cleff_prefab: {fileID: 1169345495546134, guid: d0eccf66321be49979c847b62744e23e,
     type: 2}
-  strikezone_prefab: {fileID: 1473657546378470, guid: fbeff1d85313348d2ae91d80cd7933cc,
+  strikebar_prefab: {fileID: 1915099955499468, guid: 2c9eb27951e7f4a0e97e1fe385bf42b0,
     type: 2}
   seconds_in_advance: 0
+  active_note: {fileID: 21300000, guid: 98906bdef863440058a3b00cbe0a5b04, type: 3}
 --- !u!1001 &918864503
 Prefab:
   m_ObjectHideFlags: 0
