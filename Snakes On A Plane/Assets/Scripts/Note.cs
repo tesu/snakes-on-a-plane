@@ -26,6 +26,7 @@ public class Note : MonoBehaviour {
 
 		if (!active && current_x > active_X) {
 			this.GetComponent<SpriteRenderer>().sprite = active_sprite;
+			gameObject.transform.localScale += new Vector3(.5f, .5f, 0);
 			active = true;
 		}
 
