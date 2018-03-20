@@ -64,7 +64,7 @@ public class Music {
 
     public bool WithinLeeway()
     {
-        Debug.Log("offset: "+offset);
+        Debug.Log("offset: "+ (offset - leeway / 2));
         return offset < leeway;
     }
 

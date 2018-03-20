@@ -8,7 +8,7 @@ public class SongSelect : MonoBehaviour {
 	// maybe read this data from a file in the future
 	private string[] songnames = {"Volatile_Reaction", "Pookatori_and_Friends", "Frost_Waltz", "Reformat", "Rhinoceros", "Industrious_Ferret"};
 	private int[] bpms = { 155, 124, 99, 140, 126, 95 };
-	private float[] initial_offsets = {0.3f, 0.3f, 0.3f, 0.3f, 0.3f, 0.3f}; //TODO fix for each song
+	private float[] initial_offsets = {0.0f, 0.0f, 0.02f, 0.04f, 0.0f, 0.05f};
 	private string[] bgs = {"volcano", "cemetery", "iceberg", "digital", "space", "village"};
 	public GameObject[] anim_tile_prefabs; // provided in same order as bgs
 
