@@ -25,7 +25,7 @@ public class SongSelect : MonoBehaviour {
 		songs = new SongInfo[songnames.Length];
 		//create songname objects
 		for(int i = 0; i < songnames.Length; i++) {
-			songs[i] = new SongInfo(songnames[i], bgs[i], bpms[i], initial_offsets[i]);
+			songs[i] = new SongInfo(songnames[i], bgs[i], anim_tile_prefabs[i], bpms[i], initial_offsets[i]);
 		}
 
 		Array.Sort(songs, delegate(SongInfo user1, SongInfo user2) {
@@ -63,7 +63,7 @@ public class SongSelect : MonoBehaviour {
 				GameObject.Find ("HealthBar1Back").GetComponent<SpriteRenderer>().enabled = true;
 
 				BoardManager board = gameObject.GetComponent (typeof(BoardManager)) as BoardManager;
-				board.Init (song_info_display.GetComponent<AudioSource>(), anim_tile_prefabs[song_index], songs[song_index].bpm, songs[song_index].initial_offset);
+				board.Init (song_info_display.GetComponent<AudioSource>(), songs[song_index].tile_prefab, songs[song_index].bpm, songs[song_index].initial_offset);
 			}
 		}
 	}
