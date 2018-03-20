@@ -73,7 +73,7 @@ public class Player
         if (direction.y > 0) Face(Direction.up);
         if (direction.y < 0) Face(Direction.down);
 
-        if (!moved && CanMove(direction))
+        if (!moved && CanMove(direction) && !bm.IsInvulnerable())
         {
             position += direction;
             game_object.transform.Translate(direction, Space.World);
@@ -84,7 +84,7 @@ public class Player
 
         moved = true;
         MadeBadMove();
-        return false;
+        return bm.IsInvulnerable();
     }
 
     public void MissedBeat()
