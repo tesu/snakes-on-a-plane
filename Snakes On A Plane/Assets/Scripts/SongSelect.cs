@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,6 +8,7 @@ public class SongSelect : MonoBehaviour {
 	// maybe read this data from a file in the future
 	private string[] songnames = {"Volatile_Reaction", "Pookatori_and_Friends", "Frost_Waltz", "Reformat", "Rhinoceros", "Industrious_Ferret"};
 	private int[] bpms = { 155, 124, 99, 140, 126, 95 };
+	private float[] initial_offsets = {0.3f, 0.3f, 0.3f, 0.3f, 0.3f, 0.3f}; //TODO fix for each song
 	private string[] bgs = {"volcano", "cemetery", "iceberg", "digital", "space", "village"};
 	public GameObject[] anim_tile_prefabs; // provided in same order as bgs
 
@@ -23,8 +25,12 @@ public class SongSelect : MonoBehaviour {
 		songs = new SongInfo[songnames.Length];
 		//create songname objects
 		for(int i = 0; i < songnames.Length; i++) {
-			songs[i] = new SongInfo(songnames[i], bgs[i], bpms[i]);
+			songs[i] = new SongInfo(songnames[i], bgs[i], bpms[i], initial_offsets[i]);
 		}
+
+		Array.Sort(songs, delegate(SongInfo user1, SongInfo user2) {
+			return user1.bpm.CompareTo(user2.bpm);
+		});
 
 		GameObject background = GameObject.Find (bg_prefix + songs[0].bg);
 		background.GetComponent<SpriteRenderer> ().sortingLayerName = bg_layer;
@@ -53,9 +59,11 @@ public class SongSelect : MonoBehaviour {
 				song_info_display.GetComponent<UnityEngine.UI.Text>().enabled = false;
 				GameObject.Find ("HealthBar0").GetComponent<SpriteRenderer>().enabled = true;
 				GameObject.Find ("HealthBar1").GetComponent<SpriteRenderer>().enabled = true;
+				GameObject.Find ("HealthBar0Back").GetComponent<SpriteRenderer>().enabled = true;
+				GameObject.Find ("HealthBar1Back").GetComponent<SpriteRenderer>().enabled = true;
 
 				BoardManager board = gameObject.GetComponent (typeof(BoardManager)) as BoardManager;
-				board.Init (song_info_display.GetComponent<AudioSource>(), anim_tile_prefabs[song_index], songs[song_index].bpm);
+				board.Init (song_info_display.GetComponent<AudioSource>(), anim_tile_prefabs[song_index], songs[song_index].bpm, songs[song_index].initial_offset);
 			}
 		}
 	}
