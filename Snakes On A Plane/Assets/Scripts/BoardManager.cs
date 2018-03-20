@@ -120,9 +120,11 @@ public class BoardManager : MonoBehaviour {
 			GenerateText(p_num, Music.Accuracy.miss);
         }
         else
-        {		
-			players[p_num].Move(directions[key]);		
-			GenerateText(p_num, accuracy);
+        {
+            if (players[p_num].Move(directions[key]))
+            {
+                GenerateText(p_num, accuracy);
+            }
         }
 	}
 
